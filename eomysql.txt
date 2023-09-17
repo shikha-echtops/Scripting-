@@ -1,0 +1,13 @@
+#!/bin/bash
+source /home/shikharana/root_access.conf
+
+HOST=$1
+DB_NAME=$2
+USERNAME=$3
+DEV_PASS="$(date +%s)@S"
+
+
+#Create my sql database
+mysql -u "$ROOTUSER" --password="$ROOTPASS" -h "localhost" -e "CREATE DATABASE $DB_NAME ; CREATE USER '$USERNAME'@'localhost' IDENTIFIED BY '$DEV_PASS' ; GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$USERNAME'@'localhost' ; FLUSH PRIVILEGES" ;
+
+echo "$DB_NAME has been created with this $USERNAME and this password $DEV_PASS"
